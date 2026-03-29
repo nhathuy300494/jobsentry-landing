@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobSentry | Form Tư Vấn Việc Làm</title>
+  <style>
+    :root {
+      --ink: #102033;
+      --muted: #5c6b7c;
+      --card: #ffffff;
+      --line: #d6dee8;
+      --accent: #0b5dd7;
+      --accent-2: #19a974;
+      --accent-soft: #e8f0ff;
+      --bg: radial-gradient(circle at top right, rgba(11, 93, 215, 0.16), transparent 30%), linear-gradient(160deg, #f7fbff 0%, #edf5ff 55%, #fffaf3 100%);
+      --warning: #a16207;
+      --success-bg: #ecfdf5;
+      --success-ink: #166534;
+      --error-bg: #fef2f2;
+      --error-ink: #b91c1c;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: var(--ink); background: var(--bg); min-height: 100vh; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 18px 40px; }
+    .hero { display: grid; gap: 18px; margin-bottom: 18px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 10px 14px; border-radius: 999px; background: rgba(11, 93, 215, 0.08); color: var(--accent); font-size: 14px; font-weight: 700; letter-spacing: 0.02em; }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--accent-2); box-shadow: 0 0 0 6px rgba(25, 169, 116, 0.12); }
+    .hero h1 { margin: 0; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.03em; max-width: 11ch; }
+    .hero-copy { color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 62ch; margin: 0; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; align-items: start; }
+    .card { background: var(--card); border-radius: 28px; box-shadow: 0 22px 48px rgba(16, 32, 51, 0.12); border: 1px solid rgba(214, 222, 232, 0.9); padding: 28px; }
+    .stack { display: grid; gap: 16px; }
+    .helper-card { background: linear-gradient(180deg, rgba(11, 93, 215, 0.08), rgba(25, 169, 116, 0.06)); }
+    .helper-card h2 { margin: 0; font-size: 16px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--accent); }
+    .helper-card p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .checklist { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; }
+    .checklist li { display: flex; gap: 10px; align-items: flex-start; color: var(--ink); line-height: 1.45; }
+    .checklist li::before { content: "•"; color: var(--accent-2); font-weight: 900; }
+    .grid { display: grid; gap: 16px; }
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    label { display: grid; gap: 8px; font-weight: 700; color: var(--ink); }
+    .label-help { font-weight: 500; font-size: 13px; color: var(--muted); }
+    input, select, textarea {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 13px 14px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(11, 93, 215, 0.62);
+      box-shadow: 0 0 0 4px rgba(11, 93, 215, 0.12);
+    }
+    .status { border-radius: 18px; padding: 14px 16px; font-size: 14px; line-height: 1.5; display: none; }
+    .status.show { display: block; }
+    .status.info { background: #eff6ff; color: #1d4ed8; }
+    .status.success { background: var(--success-bg); color: var(--success-ink); }
+    .status.error { background: var(--error-bg); color: var(--error-ink); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+    button:disabled { cursor: wait; opacity: 0.7; transform: none; }
+    .primary { background: var(--accent); color: white; box-shadow: 0 12px 24px rgba(11, 93, 215, 0.18); }
+    .secondary { background: var(--accent-soft); color: var(--accent); }
+    .hidden { display: none; }
+    .preview { margin-top: 8px; background: #f8fbff; border-radius: 20px; padding: 18px; border: 1px solid var(--line); }
+    .preview h3 { margin: 0 0 10px; font-size: 16px; }
+    .preview ul { margin: 0; padding-left: 18px; color: var(--ink); }
+    .preview li { margin: 8px 0; line-height: 1.45; }
+    .preview small { color: var(--warning); display: block; margin-top: 10px; }
+    .footnote { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">JobSentry Form Intake</div>
+      <div class="hero-grid">
+        <div class="card">
+          <h1>Tìm việc phù hợp và nhận tư vấn qua Zalo</h1>
+          <p class="hero-copy">Điền nhanh nhu cầu của bạn để JobSentry gợi ý nhóm việc đang tuyển phù hợp tại khu vực miền Tây. Sau khi gửi thành công, hệ thống không lưu lại thông tin của bạn trên trình duyệt này.</p>
+        </div>
+        <aside class="card helper-card stack">
+          <h2>Những gì sẽ xảy ra</h2>
+          <ul class="checklist">
+            <li>Bước 1 chọn ngành, tỉnh và kinh nghiệm để xem nhóm việc phù hợp.</li>
+            <li>Bước 2 để lại họ tên và số Zalo để advisor liên hệ trực tiếp.</li>
+            <li>Sau khi gửi thành công, form được xóa sạch khỏi trình duyệt.</li>
+          </ul>
+          <p>Hiện JobSentry đang mở intake cho 3 nhóm ngành: tuyển dụng, tư vấn, hành chính. Khu vực đang hỗ trợ: Cần Thơ, Vĩnh Long, An Giang.</p>
+        </aside>
+      </div>
+    </section>
+
+    <div class="card">
+      <form id="jobhub-form" autocomplete="off" novalidate>
+        <section id="step-1" class="grid two">
+          <label>Ngành / chuyên môn
+            <select name="nganh" required>
+              <option value="">Chọn ngành</option>
+              <option value="tuyển dụng">Tuyển dụng</option>
+              <option value="tư vấn">Tư vấn</option>
+              <option value="hành chính">Hành chính</option>
+            </select>
+            <span class="label-help">Hiện JobSentry đang nhận tư vấn cho 3 mảng công việc này.</span>
+          </label>
+          <label>Tỉnh / khu vực
+            <select name="tinh" required>
+              <option value="">Chọn tỉnh</option>
+              <option value="Cần Thơ">Cần Thơ</option>
+              <option value="Vĩnh Long">Vĩnh Long</option>
+              <option value="An Giang">An Giang</option>
+            </select>
+            <span class="label-help">Nếu bạn ở tỉnh gần kề, hãy chọn nơi muốn làm việc gần nhất.</span>
+          </label>
+          <label>Kinh nghiệm
+            <select name="kinh_nghiem" required>
+              <option value="">Chọn mức</option>
+              <option value="Chưa có">Chưa có</option>
+              <option value="1-2 năm">1-2 năm</option>
+              <option value="3-5 năm">3-5 năm</option>
+            </select>
+          </label>
+          <label>Giới tính đăng ký ứng tuyển
+            <select name="gioi_tinh" required>
+              <option value="">Chọn giới tính</option>
+              <option value="nam">Nam</option>
+              <option value="nu">Nữ</option>
+            </select>
+          </label>
+          <label>Lương mong muốn (triệu)
+            <input type="number" name="luong" min="0" max="50" step="1" autocomplete="off">
+          </label>
+        </section>
+
+        <div id="preview" class="preview hidden">
+          <h3>Nhóm việc gợi ý trước khi để lại Zalo</h3>
+          <div id="preview-body"></div>
+          <small>Đây là preview nhanh để bạn xác nhận nhu cầu. Advisor sẽ gửi danh sách phù hợp chi tiết hơn sau khi nhận form.</small>
+        </div>
+
+        <section id="step-2" class="grid two hidden">
+          <label>Họ tên
+            <input type="text" name="ho_ten" required autocomplete="off">
+          </label>
+          <label>Số Zalo (= SĐT)
+            <input type="tel" name="so_zalo" required autocomplete="off">
+          </label>
+          <label style="grid-column: 1 / -1;">Ghi chú thêm
+            <textarea name="ghi_chu" rows="3" autocomplete="off"></textarea>
+          </label>
+          <label class="hidden" aria-hidden="true">
+            Website
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </label>
+          <label style="grid-column: 1 / -1;">
+            <input type="checkbox" name="consent" value="1" required>
+            Tôi đồng ý để JobSentry liên hệ tư vấn qua Zalo.
+          </label>
+        </section>
+
+        <div id="status-box" class="status info hidden" role="status" aria-live="polite"></div>
+
+        <div class="actions">
+          <button type="button" class="primary" id="preview-button">Xem nhóm việc phù hợp</button>
+          <button type="submit" class="secondary hidden" id="submit-button">Nhận tư vấn miễn phí qua Zalo</button>
+        </div>
+
+        <p class="footnote">Nếu gửi thành công, thông tin trên form sẽ được xóa khỏi trình duyệt này. Bạn có thể gửi lại bằng một hồ sơ mới bất cứ lúc nào.</p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcd2V7OwvphLT0hbsiaSFQSwUnkN4hLXvKQIs-NbT3zZslBcTrIKalrcSCyur06zB5/exec";
+    const previewButton = document.getElementById("preview-button");
+    const preview = document.getElementById("preview");
+    const previewBody = document.getElementById("preview-body");
+    const step2 = document.getElementById("step-2");
+    const submitButton = document.getElementById("submit-button");
+    const form = document.getElementById("jobhub-form");
+    const statusBox = document.getElementById("status-box");
+
+    function setStatus(message, tone) {
+      statusBox.textContent = message;
+      statusBox.className = `status show ${tone}`;
+    }
+
+    function clearPreviewState() {
+      preview.classList.add("hidden");
+      previewBody.innerHTML = "";
+      step2.classList.add("hidden");
+      submitButton.classList.add("hidden");
+    }
+
+    function resetAfterSubmit() {
+      form.reset();
+      clearPreviewState();
+    }
+
+    async function postPayload(payload) {
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          redirect: "follow"
+        });
+        let result = {};
+        try {
+          result = await response.json();
+        } catch (parseError) {
+          result = {};
+        }
+        if (!response.ok) {
+          throw new Error(`http_${response.status}`);
+        }
+        if (result.status && result.status !== "ok") {
+          throw new Error(String(result.reason || result.status));
+        }
+        return { mode: "cors", result };
+      } catch (primaryError) {
+        await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          mode: "no-cors"
+        });
+        return { mode: "no-cors", result: {} };
+      }
+    }
+
+    previewButton.addEventListener("click", () => {
+      const data = new FormData(form);
+      const nganh = data.get("nganh") || "ngành phù hợp";
+      const tinh = data.get("tinh") || "khu vực phù hợp";
+      const exp = data.get("kinh_nghiem") || "kinh nghiệm phù hợp";
+      previewBody.innerHTML = `
+        <ul>
+          <li>Vị trí 1: ${nganh} đang tuyển tại ${tinh}, ưu tiên ứng viên có mức kinh nghiệm ${exp}.</li>
+          <li>Vị trí 2: Nhóm việc tư vấn và chăm sóc ứng viên gần khu vực ${tinh}.</li>
+          <li>Vị trí 3: Nhóm việc hành chính hỗ trợ vận hành tại ${tinh} và vùng lân cận.</li>
+        </ul>`;
+      preview.classList.remove("hidden");
+      step2.classList.remove("hidden");
+      submitButton.classList.remove("hidden");
+      setStatus("Đã mở bước 2. Hãy để lại họ tên và số Zalo để advisor liên hệ.", "info");
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const payload = Object.fromEntries(new FormData(form).entries());
+      if (payload.website) {
+        setStatus("Form không hợp lệ. Vui lòng tải lại trang và thử lại.", "error");
+        return;
+      }
+      if (!payload.nganh || !payload.tinh || !payload.kinh_nghiem || !payload.gioi_tinh || !payload.ho_ten || !payload.so_zalo || !payload.consent) {
+        setStatus("Vui lòng điền đủ thông tin bắt buộc trước khi gửi.", "error");
+        return;
+      }
+      payload.submitted_at = new Date().toISOString();
+      payload.sheet_row_id = `jobsentry-${Date.now()}`;
+      payload.utm_source = payload.utm_source || "jobsentry_landing";
+      payload.utm_content = payload.utm_content || "wave2_form_intake";
+      payload.consent = true;
+      submitButton.disabled = true;
+      setStatus("Đang gửi thông tin tới JobSentry...", "info");
+      try {
+        const submission = await postPayload(payload);
+        resetAfterSubmit();
+        if (submission.mode === "no-cors") {
+          setStatus("Đã gửi yêu cầu. Nếu không thấy advisor liên hệ, bạn có thể gửi lại sau vài phút.", "success");
+          return;
+        }
+        setStatus("Đã gửi thành công. JobSentry sẽ liên hệ qua Zalo trong thời gian sớm nhất.", "success");
+      } catch (error) {
+        setStatus("Gửi form thất bại. Vui lòng thử lại sau hoặc kiểm tra lại kết nối mạng.", "error");
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
