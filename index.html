@@ -3,99 +3,254 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JobSentry | Form Tu Van Viec Lam</title>
+  <title>JobSentry | Form Tư Vấn Việc Làm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #11243b;
-      --muted: #5f7085;
-      --card: rgba(255, 255, 255, 0.92);
-      --line: #d9e3ef;
-      --accent: #0b5dd7;
-      --accent-soft: #e9f1ff;
-      --accent-2: #17a673;
-      --bg:
-        radial-gradient(circle at top left, rgba(11, 93, 215, 0.12), transparent 28%),
-        radial-gradient(circle at top right, rgba(23, 166, 115, 0.1), transparent 22%),
-        linear-gradient(180deg, #f7fbff 0%, #eef5ff 54%, #fdfbf7 100%);
-      --success-bg: #ecfdf5;
+      --bg: #f4f7fb;
+      --bg-soft: #eef4fb;
+      --surface: rgba(255, 255, 255, 0.94);
+      --surface-strong: #ffffff;
+      --line: #dbe5f0;
+      --line-strong: #c5d5e8;
+      --ink: #333333;
+      --ink-strong: #17304b;
+      --muted: #67788d;
+      --accent: #103a77;
+      --accent-soft: #2f8dff;
+      --accent-ghost: rgba(47, 141, 255, 0.12);
+      --success-bg: #edf9f3;
       --success-ink: #166534;
-      --error-bg: #fef2f2;
+      --error-bg: #fff1f2;
       --error-ink: #b91c1c;
+      --shadow: 0 26px 60px rgba(16, 42, 78, 0.12);
+      --radius: 15px;
     }
 
     * { box-sizing: border-box; }
 
-    body {
+    html, body {
       margin: 0;
-      min-height: 100vh;
-      font-family: "Segoe UI", Arial, sans-serif;
+      min-height: 100%;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(47, 141, 255, 0.14), transparent 23%),
+        radial-gradient(circle at 92% 14%, rgba(16, 58, 119, 0.1), transparent 26%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 52%, #f6f8fc 100%);
       color: var(--ink);
-      background: var(--bg);
     }
 
-    .wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 36px 22px 54px;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(130deg, rgba(16, 58, 119, 0.04) 0%, transparent 28%),
+        radial-gradient(circle at 72% 32%, rgba(47, 141, 255, 0.09), transparent 20%);
+      opacity: 0.95;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
-      gap: 24px;
-      align-items: stretch;
-      margin-bottom: 24px;
+    .page {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 34px 18px;
     }
 
-    .card {
-      background: var(--card);
-      border: 1px solid rgba(217, 227, 239, 0.92);
-      border-radius: 32px;
-      box-shadow: 0 26px 54px rgba(17, 36, 59, 0.1);
+    .shell {
+      position: relative;
+      width: min(1160px, 100%);
+      background: var(--surface);
+      border: 1px solid rgba(197, 213, 232, 0.82);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      padding: 34px;
+      overflow: hidden;
     }
 
-    .hero-copy h1 {
-      margin: 0 0 16px;
-      font-size: clamp(42px, 7vw, 72px);
-      line-height: 0.94;
-      letter-spacing: -0.04em;
-      max-width: 9.2ch;
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 14% 6%, rgba(47, 141, 255, 0.12), transparent 20%),
+        linear-gradient(90deg, rgba(16, 58, 119, 0.05) 0%, transparent 22%, transparent 78%, rgba(47, 141, 255, 0.04) 100%);
     }
 
-    .hero-copy p {
+    .shell-header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 26px;
+      border-bottom: 1px solid rgba(197, 213, 232, 0.7);
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(248, 251, 255, 0.86));
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 10px 18px rgba(16, 58, 119, 0.12));
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .brand-name {
       margin: 0;
-      max-width: 60ch;
-      color: var(--muted);
-      font-size: 19px;
-      line-height: 1.72;
-    }
-
-    .helper-card {
-      background: linear-gradient(180deg, rgba(11, 93, 215, 0.08), rgba(23, 166, 115, 0.06));
-    }
-
-    .helper-card h2 {
-      margin: 0 0 14px;
-      font-size: 15px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.05em;
       color: var(--accent);
     }
 
-    .helper-card p {
-      margin: 0 0 14px;
+    .brand-tagline {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.72;
+      font-weight: 700;
+    }
+
+    .security-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(47, 141, 255, 0.22);
+      background: rgba(47, 141, 255, 0.08);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .security-pill::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent-soft) 0%, var(--accent) 100%);
+      box-shadow: 0 0 0 4px rgba(47, 141, 255, 0.12);
+      flex: 0 0 auto;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 26px;
+      display: grid;
+      gap: 26px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .intro-main,
+    .intro-side,
+    .form-shell {
+      border: 1px solid rgba(197, 213, 232, 0.72);
+      border-radius: calc(var(--radius) - 1px);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 16px 34px rgba(16, 42, 78, 0.06);
+    }
+
+    .intro-main {
+      padding: 28px 28px 26px;
+      background:
+        radial-gradient(circle at top left, rgba(47, 141, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248, 251, 255, 0.92) 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--accent-soft);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent-soft) 0%, var(--accent) 100%);
+      box-shadow: 0 0 0 5px rgba(47, 141, 255, 0.1);
+    }
+
+    .intro-main h1 {
+      margin: 0 0 16px;
+      max-width: 10ch;
+      font-size: clamp(40px, 7vw, 66px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      color: var(--ink-strong);
+    }
+
+    .intro-main p {
+      margin: 0;
+      max-width: 61ch;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    .intro-side {
+      padding: 24px 24px 22px;
+      background: linear-gradient(180deg, rgba(16, 58, 119, 0.06), rgba(47, 141, 255, 0.04));
+    }
+
+    .intro-side h2,
+    .form-head h2,
+    .trust-panel h2 {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .benefits {
       display: grid;
-      gap: 10px;
+      gap: 12px;
       padding: 0;
-      margin: 0;
+      margin: 0 0 16px;
       list-style: none;
     }
 
@@ -104,8 +259,8 @@
       gap: 12px;
       align-items: flex-start;
       color: var(--ink);
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     .benefits li::before {
@@ -114,99 +269,175 @@
       height: 10px;
       margin-top: 8px;
       border-radius: 999px;
-      background: linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%);
+      background: linear-gradient(180deg, var(--accent-soft) 0%, var(--accent) 100%);
       flex: 0 0 auto;
     }
 
-    .form-card {
-      padding-top: 30px;
+    .intro-side p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.78;
+    }
+
+    .form-shell {
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250, 252, 255, 0.93));
+    }
+
+    .form-head {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .form-head p {
+      margin: 0;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.72;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 20px;
+      align-items: start;
     }
 
     .field {
       display: grid;
-      gap: 8px;
+      gap: 9px;
     }
 
-    .field.span-2 { grid-column: span 2; }
-    .field.span-3 { grid-column: 1 / -1; }
-
-    label {
-      font-weight: 800;
-      font-size: 15px;
-      color: var(--ink);
-    }
-
-    .label-help {
-      margin-top: -2px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 14px 16px;
-      font: inherit;
-      color: var(--ink);
-      background: #fff;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    textarea {
-      min-height: 122px;
-      resize: vertical;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: rgba(11, 93, 215, 0.6);
-      box-shadow: 0 0 0 4px rgba(11, 93, 215, 0.12);
-    }
-
-    .trust-note,
+    .field.span-2,
     .status,
+    .trust-panel,
+    .field-consent,
+    .actions,
     .footnote {
       grid-column: 1 / -1;
     }
 
-    .trust-note {
-      padding: 18px 20px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(11, 93, 215, 0.06), rgba(23, 166, 115, 0.04));
+    label {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink-strong);
+    }
+
+    .label-help {
       color: var(--muted);
-      font-size: 15px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      color: var(--ink);
+      font: inherit;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+      appearance: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #8a99ab;
+    }
+
+    input:hover,
+    select:hover,
+    textarea:hover {
+      border-color: var(--line-strong);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: rgba(47, 141, 255, 0.86);
+      box-shadow: 0 0 0 4px rgba(47, 141, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    select {
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+        linear-gradient(135deg, var(--accent) 50%, transparent 50%),
+        linear-gradient(to right, transparent, transparent);
+      background-position:
+        calc(100% - 22px) calc(50% - 3px),
+        calc(100% - 16px) calc(50% - 3px),
+        100% 0;
+      background-size: 6px 6px, 6px 6px, 2.5em 2.5em;
+      background-repeat: no-repeat;
+      padding-right: 42px;
+    }
+
+    textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .trust-panel {
+      display: grid;
+      gap: 10px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(47, 141, 255, 0.18);
+      background: linear-gradient(180deg, rgba(47, 141, 255, 0.08), rgba(16, 58, 119, 0.04));
+    }
+
+    .trust-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
       line-height: 1.72;
     }
 
     .status {
       display: none;
       padding: 14px 16px;
-      border-radius: 18px;
+      border-radius: 14px;
       font-size: 14px;
-      line-height: 1.55;
+      line-height: 1.58;
+      border: 1px solid transparent;
     }
 
     .status.show { display: block; }
-    .status.info { background: #eff6ff; color: #1d4ed8; }
-    .status.success { background: var(--success-bg); color: var(--success-ink); }
-    .status.error { background: var(--error-bg); color: var(--error-ink); }
+    .status.info {
+      background: rgba(47, 141, 255, 0.08);
+      color: var(--accent);
+      border-color: rgba(47, 141, 255, 0.18);
+    }
+    .status.success {
+      background: var(--success-bg);
+      color: var(--success-ink);
+      border-color: rgba(22, 101, 52, 0.12);
+    }
+    .status.error {
+      background: var(--error-bg);
+      color: var(--error-ink);
+      border-color: rgba(185, 28, 28, 0.12);
+    }
 
     .consent-row {
       display: flex;
       gap: 12px;
       align-items: flex-start;
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.88);
+      padding: 16px 18px;
+      border: 1px solid rgba(197, 213, 232, 0.84);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.82);
+      color: var(--muted);
+      line-height: 1.68;
     }
 
     .consent-row input[type="checkbox"] {
@@ -216,35 +447,49 @@
       padding: 0;
       accent-color: var(--accent);
       box-shadow: none;
+      flex: 0 0 auto;
     }
 
     .actions {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
+      justify-content: center;
+      padding-top: 6px;
     }
 
     button {
+      min-width: min(100%, 320px);
       border: 0;
       border-radius: 999px;
-      padding: 15px 22px;
-      font-weight: 800;
+      padding: 16px 26px;
+      font-family: inherit;
       font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #ffffff;
       cursor: pointer;
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent) 0%, #2563eb 58%, var(--accent-2) 100%);
-      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.2);
-      transition: transform 0.16s ease, opacity 0.16s ease;
+      background: linear-gradient(135deg, var(--accent) 0%, #154993 100%);
+      box-shadow: 0 18px 34px rgba(16, 58, 119, 0.24);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
     }
 
-    button:hover { transform: translateY(-1px); }
-    button:disabled { opacity: 0.72; cursor: wait; transform: none; }
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 22px 38px rgba(16, 58, 119, 0.26);
+    }
+
+    button:disabled {
+      opacity: 0.74;
+      cursor: wait;
+      transform: none;
+      box-shadow: 0 14px 26px rgba(16, 58, 119, 0.18);
+    }
 
     .footnote {
+      text-align: center;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.62;
+      font-size: 12px;
+      line-height: 1.7;
     }
 
     .hidden {
@@ -260,128 +505,195 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid,
+      .page {
+        padding: 20px 14px;
+      }
+
+      .shell-header,
+      .content,
+      .form-shell,
+      .intro-main,
+      .intro-side {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .intro,
       .form-grid {
         grid-template-columns: 1fr;
       }
 
       .field.span-2,
-      .field.span-3,
-      .trust-note,
       .status,
+      .trust-panel,
+      .field-consent,
+      .actions,
       .footnote {
         grid-column: auto;
       }
 
-      .card {
-        padding: 24px;
+      .shell-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .brand-logo {
+        width: 52px;
+        height: 52px;
+      }
+
+      .brand-name {
+        font-size: 24px;
+      }
+
+      .intro-main h1 {
+        max-width: 100%;
+        font-size: clamp(34px, 11vw, 52px);
       }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero-grid">
-      <div class="card hero-copy">
-        <h1>Tìm việc phù hợp và nhận tư vấn qua Zalo</h1>
-        <p>Điền đầy đủ nhu cầu của bạn để JobSentry phân tích hồ sơ quan tâm, đối chiếu nhóm việc tiềm năng và chuyển nhanh cho advisor phù hợp. Thông tin trên form sẽ không được giữ lại trên trình duyệt này sau khi gửi thành công.</p>
-      </div>
-
-      <aside class="card helper-card">
-        <h2>Điền đủ thông tin sẽ giúp gì?</h2>
-        <ul class="benefits">
-          <li>Giúp hệ thống phân loại hồ sơ nhanh hơn theo tỉnh, chuyên ngành và mức kinh nghiệm.</li>
-          <li>Giúp advisor tư vấn đúng nhóm việc và đúng khu vực hơn ngay từ lần liên hệ đầu tiên.</li>
-          <li>Giảm thời gian hỏi lại nhiều lần khi cần lọc công việc phù hợp trên Zalo.</li>
-        </ul>
-        <p>JobSentry dùng dữ liệu bạn cung cấp để ghép nhu cầu với các cơ hội việc làm đang được theo dõi trong hệ thống. Bạn càng điền chính xác, chất lượng tư vấn càng tốt.</p>
-      </aside>
-    </section>
-
-    <section class="card form-card">
-      <form id="jobhub-form" autocomplete="off" novalidate>
-        <div class="form-grid">
-          <div class="field">
-            <label for="nganh">Ngành / chuyên môn</label>
-            <input id="nganh" name="nganh" type="text" placeholder="Ví dụ: tuyển dụng, kế toán, sale thị trường" required autocomplete="off">
-            <div class="label-help">Nhập tỉnh/chuyên ngành đúng chính tả để hệ thống phân loại nhanh nhất.</div>
-          </div>
-
-          <div class="field">
-            <label for="tinh">Tỉnh / khu vực</label>
-            <input id="tinh" name="tinh" type="text" placeholder="Ví dụ: Cần Thơ, Vĩnh Long, An Giang" required autocomplete="off">
-            <div class="label-help">Nhập tỉnh/chuyên ngành đúng chính tả để hệ thống phân loại nhanh nhất.</div>
-          </div>
-
-          <div class="field">
-            <label for="kinh_nghiem">Kinh nghiệm</label>
-            <select id="kinh_nghiem" name="kinh_nghiem" required>
-              <option value="">Chọn mức</option>
-              <option value="Chưa có">Chưa có</option>
-              <option value="1-2 năm">1-2 năm</option>
-              <option value="3-5 năm">3-5 năm</option>
-              <option value="Trên 5 năm">Trên 5 năm</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="gioi_tinh">Giới tính đăng ký ứng tuyển</label>
-            <select id="gioi_tinh" name="gioi_tinh" required>
-              <option value="">Chọn giới tính</option>
-              <option value="nam">Nam</option>
-              <option value="nu">Nữ</option>
-              <option value="khac">Khác</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="luong">Lương mong muốn (triệu)</label>
-            <input id="luong" name="luong" type="number" min="0" max="200" step="1" placeholder="Ví dụ: 12" autocomplete="off">
-          </div>
-
-          <div class="field">
-            <label for="ho_ten">Họ tên</label>
-            <input id="ho_ten" name="ho_ten" type="text" required autocomplete="off">
-          </div>
-
-          <div class="field">
-            <label for="so_zalo">Số Zalo (= số điện thoại)</label>
-            <input id="so_zalo" name="so_zalo" type="tel" required autocomplete="off">
-          </div>
-
-          <div class="field span-3">
-            <label for="ghi_chu">Ghi chú thêm</label>
-            <textarea id="ghi_chu" name="ghi_chu" placeholder="Ví dụ: muốn làm giờ hành chính, ưu tiên gần nhà, có thể đi công tác..." autocomplete="off"></textarea>
-          </div>
-
-          <label class="hidden" aria-hidden="true" for="website">
-            Website
-            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-          </label>
-
-          <div class="trust-note">
-            Chúng tôi dùng thuật toán big data để phân tích dữ liệu của bạn và các công việc tiềm năng, cung cấp đầy đủ chính xác sẽ giúp hiệu quả tư vấn tốt hơn.
-          </div>
-
-          <div id="status-box" class="status info" role="status" aria-live="polite"></div>
-
-          <div class="field span-3">
-            <label class="consent-row">
-              <input type="checkbox" name="consent" value="1" required>
-              <span>Tôi đồng ý để JobSentry liên hệ tư vấn qua Zalo dựa trên thông tin tôi vừa cung cấp.</span>
-            </label>
-          </div>
-
-          <div class="actions">
-            <button type="submit" id="submit-button">Nhận tư vấn miễn phí qua Zalo</button>
-          </div>
-
-          <div class="footnote">
-            Nếu gửi thành công, toàn bộ dữ liệu trên form sẽ được xóa khỏi trình duyệt này. Bạn có thể gửi lại bằng một hồ sơ mới bất cứ lúc nào.
+  <div class="page">
+    <div class="shell">
+      <header class="shell-header">
+        <div class="brand">
+          <img class="brand-logo" src="logoJS.png" alt="JobSentry logo">
+          <div class="brand-copy">
+            <p class="brand-name">JobSentry</p>
+            <p class="brand-tagline">Trusted Career Intake Gateway</p>
           </div>
         </div>
-      </form>
-    </section>
+        <div class="security-pill">Dữ liệu được bảo vệ an toàn</div>
+      </header>
+
+      <main class="content">
+        <section class="intro">
+          <div class="intro-main">
+            <div class="eyebrow">Tư vấn tuyển dụng thông minh</div>
+            <h1>Tìm việc phù hợp và nhận tư vấn qua Zalo</h1>
+            <p>JobSentry tiếp nhận nhu cầu ứng tuyển, phân tích thông tin bạn cung cấp và điều phối advisor phù hợp để liên hệ lại nhanh hơn. Trang này được thiết kế để thu thập dữ liệu rõ ràng, an toàn và đáng tin cậy ngay từ bước đầu tiên.</p>
+          </div>
+
+          <aside class="intro-side">
+            <h2>Điền đúng thông tin sẽ có lợi gì?</h2>
+            <ul class="benefits">
+              <li>Hệ thống phân loại hồ sơ nhanh hơn theo ngành, tỉnh và mức kinh nghiệm bạn mong muốn.</li>
+              <li>Advisor nhận đúng bối cảnh nhu cầu để tư vấn sát hơn ngay trong lần liên hệ đầu tiên.</li>
+              <li>Dữ liệu đầy đủ giúp JobSentry đối chiếu cơ hội việc làm tiềm năng hiệu quả và hạn chế hỏi lại nhiều lần.</li>
+            </ul>
+            <p>Thông tin của bạn chỉ được dùng cho mục đích tư vấn tuyển dụng và được chuyển tới advisor theo quy trình nội bộ của JobSentry.</p>
+          </aside>
+        </section>
+
+        <section class="form-shell">
+          <div class="form-head">
+            <h2>Điền thông tin ứng tuyển</h2>
+            <p>Nhập chính xác nhu cầu để JobSentry phân tích dữ liệu hiệu quả hơn. Trường <strong>Tỉnh / khu vực</strong> là ô nhập tự do và có gợi ý tự động, bạn vẫn có thể nhập tay theo đúng chính tả mong muốn.</p>
+          </div>
+
+          <form id="jobhub-form" autocomplete="off" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="nganh">Ngành / chuyên môn</label>
+                <input id="nganh" name="nganh" type="text" placeholder="Ví dụ: tuyển dụng, kế toán, sale thị trường" required autocomplete="off">
+                <div class="label-help">Nhập đúng chuyên ngành để hệ thống phân loại nhanh và chính xác hơn.</div>
+              </div>
+
+              <div class="field">
+                <label for="tinh">Tỉnh / khu vực</label>
+                <input id="tinh" name="tinh" type="text" list="tinh-suggestions" placeholder="Ví dụ: Cần Thơ, Vĩnh Long, An Giang" required autocomplete="off">
+                <datalist id="tinh-suggestions">
+                  <option value="Cần Thơ"></option>
+                  <option value="Vĩnh Long"></option>
+                  <option value="An Giang"></option>
+                  <option value="Đồng Tháp"></option>
+                  <option value="Kiên Giang"></option>
+                  <option value="Hậu Giang"></option>
+                  <option value="Sóc Trăng"></option>
+                  <option value="Bạc Liêu"></option>
+                  <option value="Cà Mau"></option>
+                  <option value="Bến Tre"></option>
+                  <option value="Trà Vinh"></option>
+                  <option value="Tiền Giang"></option>
+                  <option value="Long An"></option>
+                </datalist>
+                <div class="label-help">Bạn có thể chọn từ gợi ý hoặc tự nhập địa điểm mong muốn làm việc.</div>
+              </div>
+
+              <div class="field">
+                <label for="kinh_nghiem">Kinh nghiệm</label>
+                <select id="kinh_nghiem" name="kinh_nghiem" required>
+                  <option value="">Chọn mức</option>
+                  <option value="Chưa có">Chưa có</option>
+                  <option value="1-2 năm">1-2 năm</option>
+                  <option value="3-5 năm">3-5 năm</option>
+                  <option value="Trên 5 năm">Trên 5 năm</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="gioi_tinh">Giới tính đăng ký ứng tuyển</label>
+                <select id="gioi_tinh" name="gioi_tinh" required>
+                  <option value="">Chọn giới tính</option>
+                  <option value="nam">Nam</option>
+                  <option value="nu">Nữ</option>
+                  <option value="khac">Khác</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="luong">Lương mong muốn (triệu)</label>
+                <input id="luong" name="luong" type="number" min="0" max="200" step="1" placeholder="Ví dụ: 12" autocomplete="off">
+              </div>
+
+              <div class="field">
+                <label for="ho_ten">Họ tên</label>
+                <input id="ho_ten" name="ho_ten" type="text" placeholder="Ví dụ: Nguyễn Văn A" required autocomplete="off">
+              </div>
+
+              <div class="field">
+                <label for="so_zalo">Số Zalo (= số điện thoại)</label>
+                <input id="so_zalo" name="so_zalo" type="tel" placeholder="Ví dụ: 09xxxxxxxx" required autocomplete="off">
+              </div>
+
+              <div class="field span-2">
+                <label for="ghi_chu">Ghi chú thêm</label>
+                <textarea id="ghi_chu" name="ghi_chu" placeholder="Ví dụ: muốn làm giờ hành chính, ưu tiên gần nhà, có thể đi công tác..." autocomplete="off"></textarea>
+              </div>
+
+              <label class="hidden" aria-hidden="true" for="website">
+                Website
+                <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </label>
+
+              <div class="trust-panel">
+                <h2>Cam kết xử lý an toàn</h2>
+                <p>JobSentry dùng thuật toán big data để phân tích dữ liệu bạn cung cấp và đối chiếu với các cơ hội việc làm tiềm năng. Càng điền đầy đủ, advisor càng tư vấn đúng và nhanh hơn.</p>
+                <p>Dữ liệu trên form không được lưu lại trên trình duyệt này sau khi gửi thành công và chỉ được sử dụng cho quy trình tư vấn nội bộ của JobSentry.</p>
+              </div>
+
+              <div id="status-box" class="status info" role="status" aria-live="polite"></div>
+
+              <div class="field field-consent">
+                <label class="consent-row">
+                  <input type="checkbox" name="consent" value="1" required>
+                  <span>Tôi đồng ý để JobSentry liên hệ tư vấn qua Zalo dựa trên thông tin tôi vừa cung cấp.</span>
+                </label>
+              </div>
+
+              <div class="actions">
+                <button type="submit" id="submit-button">Gửi Yêu Cầu Tư Vấn</button>
+              </div>
+
+              <div class="footnote">
+                Nếu gửi thành công, toàn bộ dữ liệu trên form sẽ được xóa khỏi trình duyệt này. Bạn có thể gửi lại bằng một hồ sơ mới bất cứ lúc nào.
+              </div>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
   </div>
 
   <script>
